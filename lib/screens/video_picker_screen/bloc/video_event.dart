@@ -22,17 +22,3 @@ class VideoFromGalleryButtonPressedEvent extends VideoEvent{
     return "VideoFromGalleryButtonPressedEvent";
   }
 }
-
-class VideoPlayButtonPressedEvent extends VideoEvent{
-  @override
-  String toString() {
-    return "VideoPlayButtonPressedEvent";
-  }
-}
-
-class VideoPauseButtonPressedEvent extends VideoEvent{
-  @override
-  String toString() {
-    return "VideoPauseButtonPressedEvent";
-  }
-}

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media_picker/screens/home_screen/bloc/home_bloc.dart';
+import 'package:media_picker/screens/home_screen/home_screen.dart';
 import 'package:media_picker/screens/image_html_screen/bloc/image_html_bloc.dart';
 import 'package:media_picker/screens/image_html_screen/image_html_screen.dart';
 import 'package:media_picker/screens/image_picker_screen/bloc/image_bloc.dart';
@@ -14,6 +16,7 @@ class AppRoutes {
   static const String VIDEO_PICKER_SCREEN = 'video_picker_screen';
   static const String IMAGE_VIEWING_SCREEN = 'image_viewing_screen';
   static const String IMAGE_HTML_SCREEN = 'image_html_screen';
+  static const String HOME_SCREEN = 'home_screen';
 }
 
 Route<dynamic> getRoute(RouteSettings settings) {
@@ -26,6 +29,8 @@ Route<dynamic> getRoute(RouteSettings settings) {
       return buildImageViewingScreen(settings);
     case AppRoutes.IMAGE_HTML_SCREEN:
       return buildImageHtmlScreen();
+    case AppRoutes.HOME_SCREEN:
+      return buildHomeScreen();
   }
 }
 
@@ -66,6 +71,15 @@ class PageBuilder {
       child: ImageHtmlScreen(),
     );
   }
+
+  static Widget buildHomeScreenPage() {
+    return BlocProvider<HomeBloc>(
+      create: (context) {
+        return HomeBloc();
+      },
+      child: HomeScreen(),
+    );
+  }
 }
 
 buildVideoPickerScreen() {
@@ -89,5 +103,11 @@ buildImageViewingScreen(RouteSettings settings) {
 buildImageHtmlScreen() {
   return MaterialPageRoute(
     builder: (context) => PageBuilder.buildImageHtmlScreenPage(),
+  );
+}
+
+buildHomeScreen() {
+  return MaterialPageRoute(
+    builder: (context) => PageBuilder.buildHomeScreenPage(),
   );
 }

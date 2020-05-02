@@ -38,12 +38,3 @@ class ImageViewNavigateState extends ImageState {
     return "ImageViewNavigateState";
   }
 }
-
-class VideoNavigateState extends ImageState {
-  @override
-  bool operator ==(Object other) => false;
-  @override
-  String toString() {
-    return "VideoNavigateState";
-  }
-}

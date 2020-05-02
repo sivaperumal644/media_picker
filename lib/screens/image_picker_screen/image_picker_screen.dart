@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:media_picker/components/custom_alert_dialog.dart';
 import 'package:media_picker/components/custom_text.dart';
 import 'package:media_picker/routes.dart';
@@ -7,6 +8,7 @@ import 'package:media_picker/screens/image_picker_screen/bloc/image_bloc.dart';
 import 'package:media_picker/screens/image_picker_screen/bloc/image_event.dart';
 import 'package:media_picker/screens/image_picker_screen/bloc/image_state.dart';
 import 'package:media_picker/screens/image_viewing_screen/bloc/image_view_bloc.dart';
+import 'package:media_picker/utils/image_resource.dart';
 import 'package:media_picker/utils/string_resource.dart';
 
 class ImagePickerScreen extends StatefulWidget {
@@ -26,21 +28,19 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: CustomText(text: StringResource.imagePickerText)),
+      appBar: AppBar(
+        title: CustomText(text: StringResource.imagePickerText),
+        backgroundColor: Colors.red.withOpacity(0.8),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: onFloatingActionButtonPressed,
         child: Icon(Icons.photo_camera),
+        backgroundColor: Colors.red.withOpacity(0.8),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: BlocListener<ImageBloc, ImageState>(
         bloc: imageBloc,
         listener: (context, state) {
-          if (state is VideoNavigateState) {
-            Navigator.pushNamed(
-              context,
-              AppRoutes.VIDEO_PICKER_SCREEN,
-            );
-          }
           if (state is ImageAvailableState) {
             Navigator.pop(context);
           }
@@ -57,8 +57,16 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
           bloc: imageBloc,
           builder: (BuildContext context, ImageState state) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                SizedBox(height: 50),
+                CustomText(
+                  text: StringResource.captureImageText,
+                  style: GoogleFonts.quicksand(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 24),
                 (imageBloc.image != null)
                     ? GestureDetector(
                         onTap: () {
@@ -67,24 +75,37 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                           );
                         },
                         child: Center(
-                          child: Image.file(
-                            imageBloc.image,
-                            width: 300,
-                            height: 300,
-                            fit: BoxFit.cover,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.5),
+                                  blurRadius: 8.0,
+                                  offset: Offset(1, 4),
+                                )
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(24),
+                              child: Image.file(
+                                imageBloc.image,
+                                width: 350,
+                                height: 350,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                       )
                     : Center(
-                        child: CustomText(text: StringResource.noImageText),
+                        child: Image.asset(
+                          ImageResourse.placeHolder,
+                          width: 350,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                SizedBox(height: 30),
-                RaisedButton(
-                  onPressed: () {
-                    imageBloc.add(NavigateButtonPressedEvent());
-                  },
-                  child: CustomText(text: StringResource.movieToVideoText),
-                )
               ],
             );
           },
@@ -97,6 +118,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
     return showDialog(
       context: context,
       builder: (_) => CustomAlertDialog(
+        titleText: StringResource.pickAnImageText,
         onCameraPressed: () {
           imageBloc.add(ImageFromCameraButtonPressedEvent());
         },

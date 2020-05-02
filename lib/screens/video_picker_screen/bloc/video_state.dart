@@ -10,26 +10,6 @@ class VideoInitialState extends VideoState {
   }
 }
 
-class VideoPlayingState extends VideoState {
-  @override
-  bool operator ==(Object other) => false;
-
-  @override
-  String toString() {
-    return "VideoPlayingState";
-  }
-}
-
-class VideoPausedState extends VideoState {
-  @override
-  bool operator ==(Object other) => false;
-
-  @override
-  String toString() {
-    return "VideoPausedState";
-  }
-}
-
 class VideoAvailableState extends VideoState {
   @override
   bool operator ==(Object other) => false;

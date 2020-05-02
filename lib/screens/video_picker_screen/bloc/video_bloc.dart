@@ -24,14 +24,6 @@ class VideoBloc extends Bloc<VideoEvent, VideoState> {
       chewieController = await getVideo(ImageSource.gallery);
       if (chewieController != null) yield VideoAvailableState();
     }
-    // if (event is VideoPlayButtonPressedEvent) {
-    //   playVideo();
-    //   yield VideoPlayingState();
-    // }
-    // if (event is VideoPauseButtonPressedEvent) {
-    //   pauseVideo();
-    //   yield VideoPausedState();
-    // }
   }
 
   getVideo(ImageSource source) async {

@@ -33,9 +33,8 @@ class _ImageHtmlScreenState extends State<ImageHtmlScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: CustomText(
-          text: 'HTML Image',
-        ),
+        title: CustomText(text: 'HTML Image'),
+        backgroundColor: Colors.red.withOpacity(0.8),
       ),
       body: BlocListener(
         bloc: imageHtmlBloc,
@@ -53,14 +52,12 @@ class _ImageHtmlScreenState extends State<ImageHtmlScreen> {
           bloc: imageHtmlBloc,
           builder: (context, state) {
             return SingleChildScrollView(
-              child: Center(
-                child: Html(
-                  padding: EdgeInsets.all(24),
-                  data: data,
-                  onImageTap: (src) {
-                    imageHtmlBloc.add(ImageHtmlButtonPressedEvent(src));
-                  },
-                ),
+              child: Html(
+                padding: EdgeInsets.all(24),
+                data: data,
+                onImageTap: (src) {
+                  imageHtmlBloc.add(ImageHtmlButtonPressedEvent(src));
+                },
               ),
             );
           },

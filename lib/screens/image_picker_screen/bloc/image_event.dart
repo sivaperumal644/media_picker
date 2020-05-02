@@ -25,13 +25,6 @@ class ImageFromGalleryButtonPressedEvent extends ImageEvent {
   }
 }
 
-class NavigateButtonPressedEvent extends ImageEvent {
-  @override
-  String toString() {
-    return "NavigateButtonPressedEvent";
-  }
-}
-
 class ImageViewNavigateEvent extends ImageEvent {
   File image;
   ImageViewNavigateEvent(this.image);

@@ -23,9 +23,6 @@ class ImageBloc extends Bloc<ImageEvent, ImageState> {
       image = await getImage(ImageSource.gallery);
       if (image != null) yield ImageAvailableState();
     }
-    if (event is NavigateButtonPressedEvent) {
-      yield VideoNavigateState();
-    }
     if (event is ImageViewNavigateEvent) {
       yield ImageViewNavigateState(event.image);
     }
