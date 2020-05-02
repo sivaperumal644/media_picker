@@ -16,7 +16,7 @@ class PrimaryButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: RaisedButton(
         padding: EdgeInsets.symmetric(vertical: 16),
-        color: Colors.red.withOpacity(0.75),
+        color: Colors.red.withOpacity(0.9),
         onPressed: onPressed,
         child: CustomText(
           text: buttonText,
