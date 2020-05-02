@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_picker/components/custom_alert_dialog.dart';
 import 'package:media_picker/components/custom_text.dart';
-import 'package:media_picker/screens/image_html_screen.dart';
+import 'package:media_picker/routes.dart';
+import 'package:media_picker/screens/image_html_screen/image_html_screen.dart';
 import 'package:media_picker/screens/video_picker_screen/bloc/video_event.dart';
 import 'package:media_picker/utils/string_resource.dart';
 import 'bloc/video_bloc.dart';
@@ -63,10 +64,7 @@ class _VideoPickerScreenState extends State<VideoPickerScreen> {
                       ),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ImageHtmlScreen()));
+                    Navigator.pushNamed(context, AppRoutes.IMAGE_HTML_SCREEN);
                   },
                   child: CustomText(
                     text: 'Navigate to html page',

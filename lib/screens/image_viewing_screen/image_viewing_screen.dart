@@ -29,7 +29,11 @@ class _ImageViewingScreenState extends State<ImageViewingScreen> {
           body: Container(
             constraints: BoxConstraints.expand(
                 height: MediaQuery.of(context).size.height),
-            child: PhotoView(imageProvider: FileImage(imageViewBloc.image)),
+            child: PhotoView(
+              imageProvider: (imageViewBloc.image != null)
+                  ? FileImage(imageViewBloc.image)
+                  : NetworkImage(imageViewBloc.imageString),
+            ),
           ),
         );
       },

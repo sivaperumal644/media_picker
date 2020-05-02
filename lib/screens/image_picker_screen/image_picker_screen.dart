@@ -45,7 +45,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
             Navigator.pop(context);
           }
           if (state is ImageViewNavigateState) {
-            ImageViewArgs args = ImageViewArgs(state.image);
+            ImageViewArgs args = ImageViewArgs(image: state.image);
             Navigator.pushNamed(
               context,
               AppRoutes.IMAGE_VIEWING_SCREEN,
