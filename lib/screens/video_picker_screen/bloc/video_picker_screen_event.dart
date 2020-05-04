@@ -1,22 +1,22 @@
 import 'package:media_picker/utils/base_equatable.dart';
 
-class VideoEvent extends BaseEquatable {}
+class VideoPickerScreenEvent extends BaseEquatable {}
 
-class VideoCaptureButtonPressedEvent extends VideoEvent{
+class VideoPickerScreenCaptureButtonPressedEvent extends VideoPickerScreenEvent{
   @override
   String toString() {
     return "VideoCaptureButtonPressedEvent";
   }
 }
 
-class VideoFromCameraButtonPressedEvent extends VideoEvent{
+class VideoPickerScreenCameraButtonPressedEvent extends VideoPickerScreenEvent{
   @override
   String toString() {
     return "VideoFromCameraButtonPressedEvent";
   }
 }
 
-class VideoFromGalleryButtonPressedEvent extends VideoEvent{
+class VideoPickerScreenGalleryButtonPressedEvent extends VideoPickerScreenEvent{
   @override
   String toString() {
     return "VideoFromGalleryButtonPressedEvent";

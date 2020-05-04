@@ -1,8 +1,8 @@
 import 'package:media_picker/utils/base_equatable.dart';
 
-class ImageViewEvent extends BaseEquatable {}
+class ImageViewingScreenEvent extends BaseEquatable {}
 
-class ImageviewInitialEvent extends ImageViewEvent {
+class ImageviewingScreenInitialEvent extends ImageViewingScreenEvent {
   @override
   String toString() {
     return "ImageViewInitialEvent";

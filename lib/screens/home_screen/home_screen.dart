@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:media_picker/components/custom_text.dart';
-import 'package:media_picker/components/primary_button.dart';
 import 'package:media_picker/routes.dart';
-import 'package:media_picker/screens/home_screen/bloc/home_bloc.dart';
-import 'package:media_picker/screens/home_screen/bloc/home_event.dart';
-import 'package:media_picker/screens/home_screen/bloc/home_state.dart';
+import 'package:media_picker/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:media_picker/screens/home_screen/bloc/home_screen_event.dart';
+import 'package:media_picker/screens/home_screen/bloc/home_screen_state.dart';
+import 'package:media_picker/utils/color_resource.dart';
 import 'package:media_picker/utils/image_resource.dart';
 import 'package:media_picker/utils/string_resource.dart';
+import 'package:media_picker/widget/common/custom_image.dart';
+import 'package:media_picker/widget/common/custom_scaffold.dart';
+import 'package:media_picker/widget/common/custom_text.dart';
+import 'package:media_picker/widget/common/primary_button.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,33 +19,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeBloc homeBloc;
+  HomeScreenBloc homeScreenBloc;
 
   @override
   void initState() {
-    homeBloc = BlocProvider.of<HomeBloc>(context);
+    homeScreenBloc = BlocProvider.of<HomeScreenBloc>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       backgroundColor: Colors.white,
       body: BlocListener(
-        bloc: homeBloc,
+        bloc: homeScreenBloc,
         listener: (context, state) {
-          if (state is HomeImageButtonPressedState) {
+          if (state is HomeScreenImageButtonPressedState) {
             Navigator.pushNamed(context, AppRoutes.IMAGE_PICKER_SCREEN);
           }
-          if (state is HomeVideoButtonPressedState) {
+          if (state is HomeScreenVideoButtonPressedState) {
             Navigator.pushNamed(context, AppRoutes.VIDEO_PICKER_SCREEN);
           }
-          if (state is HomeHtmlImageButtonPressedState) {
+          if (state is HomeScreenHtmlImageButtonPressedState) {
             Navigator.pushNamed(context, AppRoutes.IMAGE_HTML_SCREEN);
           }
         },
-        child: BlocBuilder<HomeBloc, HomeState>(
-          bloc: homeBloc,
+        child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+          bloc: homeScreenBloc,
           builder: (context, state) {
             return Container(
               width: MediaQuery.of(context).size.width,
@@ -50,8 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset(
-                    ImageResourse.cameraImage,
+                  CustomImage(
+                    image: ImageResourse.cameraImage,
                     width: 150,
                     height: 150,
                     fit: BoxFit.cover,
@@ -62,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.aBeeZee(
                       fontSize: 36,
-                      color: Colors.red,
+                      color: ColorResource.primaryColor,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
                     ),
@@ -81,21 +84,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   PrimaryButton(
                     buttonText: StringResource.imagePickerText,
                     onPressed: () {
-                      homeBloc.add(HomeImageButtonPressedEvent());
+                      homeScreenBloc.add(HomeScreenImageButtonPressedEvent());
                     },
                   ),
                   SizedBox(height: 24),
                   PrimaryButton(
                     buttonText: StringResource.videoPickerText,
                     onPressed: () {
-                      homeBloc.add(HomeVideoButtonPressedEvent());
+                      homeScreenBloc.add(HomeScreenVideoButtonPressedEvent());
                     },
                   ),
                   SizedBox(height: 24),
                   PrimaryButton(
                     buttonText: StringResource.htmlImageText,
                     onPressed: () {
-                      homeBloc.add(HomeHtmlImageButtonPressedEvent());
+                      homeScreenBloc
+                          .add(HomeScreenHtmlImageButtonPressedEvent());
                     },
                   )
                 ],

@@ -2,32 +2,32 @@ import 'dart:io';
 
 import 'package:media_picker/utils/base_equatable.dart';
 
-class ImageEvent extends BaseEquatable {}
+class ImagePickerScreenEvent extends BaseEquatable {}
 
-class ImageCaptureButtonPressedEvent extends ImageEvent {
+class ImagePickerScreenCaptureButtonPressedEvent extends ImagePickerScreenEvent {
   @override
   String toString() {
     return "ImageCaptureButtonPressedEvent";
   }
 }
 
-class ImageFromCameraButtonPressedEvent extends ImageEvent {
+class ImagePickerScreenCameraButtonPressedEvent extends ImagePickerScreenEvent {
   @override
   String toString() {
     return "ImageFromCameraButtonPressedEvent";
   }
 }
 
-class ImageFromGalleryButtonPressedEvent extends ImageEvent {
+class ImagePickerScreenGalleryButtonPressedEvent extends ImagePickerScreenEvent {
   @override
   String toString() {
     return "ImageFromGalleryButtonPressedEvent";
   }
 }
 
-class ImageViewNavigateEvent extends ImageEvent {
+class ImagePickerScreenNavigateEvent extends ImagePickerScreenEvent {
   File image;
-  ImageViewNavigateEvent(this.image);
+  ImagePickerScreenNavigateEvent(this.image);
   @override
   String toString() {
     return "ImageViewNavigateEvent";

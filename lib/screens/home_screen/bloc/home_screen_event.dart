@@ -1,22 +1,22 @@
 import 'package:media_picker/utils/base_equatable.dart';
 
-class HomeEvent extends BaseEquatable {}
+class HomeScreenEvent extends BaseEquatable {}
 
-class HomeImageButtonPressedEvent extends HomeEvent{
+class HomeScreenImageButtonPressedEvent extends HomeScreenEvent{
   @override
   String toString() {
     return "HomeImageButtonPressedEvent";
   }
 }
 
-class HomeVideoButtonPressedEvent extends HomeEvent{
+class HomeScreenVideoButtonPressedEvent extends HomeScreenEvent{
   @override
   String toString() {
     return "HomeVideoButtonPressedEvent";
   }
 }
 
-class HomeHtmlImageButtonPressedEvent extends HomeEvent{
+class HomeScreenHtmlImageButtonPressedEvent extends HomeScreenEvent{
   @override
   String toString() {
     return "HomeHtmlImageButtonPressedEvent";

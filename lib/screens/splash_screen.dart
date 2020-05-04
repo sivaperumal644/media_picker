@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:media_picker/components/custom_text.dart';
 import 'package:media_picker/routes.dart';
+import 'package:media_picker/utils/color_resource.dart';
 import 'package:media_picker/utils/image_resource.dart';
 import 'package:media_picker/utils/string_resource.dart';
+import 'package:media_picker/widget/common/custom_image.dart';
+import 'package:media_picker/widget/common/custom_scaffold.dart';
+import 'package:media_picker/widget/common/custom_text.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,14 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Center(
-            child: Image.asset(
-              ImageResourse.cameraImage,
+            child: CustomImage(
+              image: ImageResourse.cameraImage,
               width: 150,
               height: 150,
             ),
@@ -40,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             textAlign: TextAlign.center,
             style: GoogleFonts.aBeeZee(
               fontSize: 36,
-              color: Colors.red,
+              color: ColorResource.primaryColor,
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
             ),

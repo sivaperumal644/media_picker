@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:media_picker/components/custom_alert_dialog.dart';
-import 'package:media_picker/components/custom_text.dart';
 import 'package:media_picker/routes.dart';
-import 'package:media_picker/screens/image_picker_screen/bloc/image_bloc.dart';
-import 'package:media_picker/screens/image_picker_screen/bloc/image_event.dart';
-import 'package:media_picker/screens/image_picker_screen/bloc/image_state.dart';
-import 'package:media_picker/screens/image_viewing_screen/bloc/image_view_bloc.dart';
+import 'package:media_picker/screens/image_picker_screen/bloc/image_picker_screen_bloc.dart';
+import 'package:media_picker/screens/image_picker_screen/bloc/image_picker_screen_event.dart';
+import 'package:media_picker/screens/image_picker_screen/bloc/image_picker_screen_state.dart';
+import 'package:media_picker/screens/image_viewing_screen/bloc/image_viewing_screen_bloc.dart';
+import 'package:media_picker/utils/color_resource.dart';
 import 'package:media_picker/utils/image_resource.dart';
 import 'package:media_picker/utils/string_resource.dart';
+import 'package:media_picker/widget/common/custom_alert_dialog.dart';
+import 'package:media_picker/widget/common/custom_scaffold.dart';
+import 'package:media_picker/widget/common/custom_text.dart';
 
 class ImagePickerScreen extends StatefulWidget {
   @override
@@ -17,35 +19,35 @@ class ImagePickerScreen extends StatefulWidget {
 }
 
 class _ImagePickerScreenState extends State<ImagePickerScreen> {
-  ImageBloc imageBloc;
+  ImagePickerScreenBloc imageBloc;
 
   @override
   void initState() {
-    imageBloc = BlocProvider.of<ImageBloc>(context);
+    imageBloc = BlocProvider.of<ImagePickerScreenBloc>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: CustomText(text: StringResource.imagePickerText),
-        backgroundColor: Colors.red.withOpacity(0.8),
+        backgroundColor: ColorResource.primaryColor.withOpacity(0.8),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: onFloatingActionButtonPressed,
         child: Icon(Icons.photo_camera),
-        backgroundColor: Colors.red.withOpacity(0.8),
+        backgroundColor: ColorResource.primaryColor.withOpacity(0.8),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: BlocListener<ImageBloc, ImageState>(
+      body: BlocListener<ImagePickerScreenBloc, ImagePickerScreenState>(
         bloc: imageBloc,
         listener: (context, state) {
-          if (state is ImageAvailableState) {
+          if (state is ImagePickerScreenImageAvailableState) {
             Navigator.pop(context);
           }
-          if (state is ImageViewNavigateState) {
-            ImageViewArgs args = ImageViewArgs(image: state.image);
+          if (state is ImagePickerScreenNavigateState) {
+            ImageViewArgs args = ImageViewArgs(fileImage: state.image);
             Navigator.pushNamed(
               context,
               AppRoutes.IMAGE_VIEWING_SCREEN,
@@ -53,9 +55,9 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
             );
           }
         },
-        child: BlocBuilder<ImageBloc, ImageState>(
+        child: BlocBuilder<ImagePickerScreenBloc, ImagePickerScreenState>(
           bloc: imageBloc,
-          builder: (BuildContext context, ImageState state) {
+          builder: (BuildContext context, ImagePickerScreenState state) {
             return Column(
               children: <Widget>[
                 SizedBox(height: 50),
@@ -68,10 +70,10 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                 ),
                 SizedBox(height: 24),
                 (imageBloc.image != null)
-                    ? GestureDetector(
+                    ? InkWell(
                         onTap: () {
                           imageBloc.add(
-                            ImageViewNavigateEvent(imageBloc.image),
+                            ImagePickerScreenNavigateEvent(imageBloc.image),
                           );
                         },
                         child: Center(
@@ -120,10 +122,10 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       builder: (_) => CustomAlertDialog(
         titleText: StringResource.pickAnImageText,
         onCameraPressed: () {
-          imageBloc.add(ImageFromCameraButtonPressedEvent());
+          imageBloc.add(ImagePickerScreenCameraButtonPressedEvent());
         },
         onGalleryPressed: () {
-          imageBloc.add(ImageFromGalleryButtonPressedEvent());
+          imageBloc.add(ImagePickerScreenGalleryButtonPressedEvent());
         },
       ),
     );

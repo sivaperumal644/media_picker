@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:media_picker/screens/home_screen/bloc/home_bloc.dart';
+import 'package:media_picker/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:media_picker/screens/home_screen/home_screen.dart';
-import 'package:media_picker/screens/image_html_screen/bloc/image_html_bloc.dart';
-import 'package:media_picker/screens/image_html_screen/image_html_screen.dart';
-import 'package:media_picker/screens/image_picker_screen/bloc/image_bloc.dart';
+import 'package:media_picker/screens/html_image_screen/bloc/html_image_screen_bloc.dart';
+import 'package:media_picker/screens/html_image_screen/html_image_screen.dart';
+import 'package:media_picker/screens/image_picker_screen/bloc/image_picker_screen_bloc.dart';
 import 'package:media_picker/screens/image_picker_screen/image_picker_screen.dart';
-import 'package:media_picker/screens/image_viewing_screen/bloc/image_view_bloc.dart';
+import 'package:media_picker/screens/image_viewing_screen/bloc/image_viewing_screen_bloc.dart';
 import 'package:media_picker/screens/image_viewing_screen/image_viewing_screen.dart';
-import 'package:media_picker/screens/video_picker_screen/bloc/video_bloc.dart';
+import 'package:media_picker/screens/video_picker_screen/bloc/video_picker_screen_bloc.dart';
 import 'package:media_picker/screens/video_picker_screen/video_picker_screen.dart';
 
 class AppRoutes {
@@ -36,46 +36,46 @@ Route<dynamic> getRoute(RouteSettings settings) {
 
 class PageBuilder {
   static Widget buildImagePickerScreenPage() {
-    return BlocProvider<ImageBloc>(
+    return BlocProvider<ImagePickerScreenBloc>(
       create: (context) {
-        return ImageBloc();
+        return ImagePickerScreenBloc();
       },
       child: ImagePickerScreen(),
     );
   }
 
   static Widget buildVideoPickerScreenPage() {
-    return BlocProvider<VideoBloc>(
+    return BlocProvider<VideoPickerScreenBloc>(
       create: (context) {
-        return VideoBloc();
+        return VideoPickerScreenBloc();
       },
       child: VideoPickerScreen(),
     );
   }
 
   static Widget buildImageViewerScreenPage(RouteSettings settings) {
-    return BlocProvider<ImageViewBloc>(
+    return BlocProvider<ImageViewingScreenBloc>(
       create: (context) {
         ImageViewArgs args = settings.arguments;
-        return ImageViewBloc(args);
+        return ImageViewingScreenBloc(args);
       },
       child: ImageViewingScreen(),
     );
   }
 
   static Widget buildImageHtmlScreenPage() {
-    return BlocProvider<ImageHtmlBloc>(
+    return BlocProvider<HtmlImageScreenBloc>(
       create: (context) {
-        return ImageHtmlBloc();
+        return HtmlImageScreenBloc();
       },
       child: ImageHtmlScreen(),
     );
   }
 
   static Widget buildHomeScreenPage() {
-    return BlocProvider<HomeBloc>(
+    return BlocProvider<HomeScreenBloc>(
       create: (context) {
-        return HomeBloc();
+        return HomeScreenBloc();
       },
       child: HomeScreen(),
     );

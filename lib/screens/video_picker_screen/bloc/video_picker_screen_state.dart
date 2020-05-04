@@ -1,16 +1,16 @@
 
 import 'package:media_picker/utils/base_equatable.dart';
 
-class VideoState extends BaseEquatable {}
+class VideoPickerScreenState extends BaseEquatable {}
 
-class VideoInitialState extends VideoState {
+class VideoPickerScreenInitialState extends VideoPickerScreenState {
   @override
   String toString() {
     return "VideoInitialState";
   }
 }
 
-class VideoAvailableState extends VideoState {
+class VideoPickerScreenVideoAvailableState extends VideoPickerScreenState {
   @override
   bool operator ==(Object other) => false;
 
@@ -20,9 +20,3 @@ class VideoAvailableState extends VideoState {
   }
 }
 
-class VideoDialogState extends VideoState {
-  @override
-  String toString() {
-    return "VideoDialogState";
-  }
-}

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:media_picker/screens/image_viewing_screen/bloc/image_view_bloc.dart';
-import 'package:media_picker/screens/image_viewing_screen/bloc/image_view_state.dart';
+import 'package:media_picker/screens/image_viewing_screen/bloc/image_viewing_screen_bloc.dart';
+import 'package:media_picker/screens/image_viewing_screen/bloc/image_viewing_screen_state.dart';
+import 'package:media_picker/widget/common/custom_scaffold.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageViewingScreen extends StatefulWidget {
@@ -11,28 +12,28 @@ class ImageViewingScreen extends StatefulWidget {
 }
 
 class _ImageViewingScreenState extends State<ImageViewingScreen> {
-  ImageViewBloc imageViewBloc;
+  ImageViewingScreenBloc imageViewBloc;
 
   @override
   void initState() {
-    imageViewBloc = BlocProvider.of<ImageViewBloc>(context);
+    imageViewBloc = BlocProvider.of<ImageViewingScreenBloc>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ImageViewBloc, ImageViewState>(
+    return BlocBuilder<ImageViewingScreenBloc, ImageViewingScreenState>(
       bloc: imageViewBloc,
       builder: (context, state) {
-        return Scaffold(
+        return CustomScaffold(
           appBar: AppBar(backgroundColor: Colors.black),
           body: Container(
             constraints: BoxConstraints.expand(
                 height: MediaQuery.of(context).size.height),
             child: PhotoView(
-              imageProvider: (imageViewBloc.image != null)
-                  ? FileImage(imageViewBloc.image)
-                  : NetworkImage(imageViewBloc.imageString),
+              imageProvider: (imageViewBloc.fileImage != null)
+                  ? FileImage(imageViewBloc.fileImage)
+                  : NetworkImage(imageViewBloc.stringImage),
             ),
           ),
         );

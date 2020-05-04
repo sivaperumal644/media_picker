@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:media_picker/components/custom_text.dart';
+import 'package:media_picker/utils/color_resource.dart';
+import 'package:media_picker/widget/common/custom_text.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String buttonText;
@@ -16,7 +17,7 @@ class PrimaryButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: RaisedButton(
         padding: EdgeInsets.symmetric(vertical: 16),
-        color: Colors.red.withOpacity(0.9),
+        color: ColorResource.primaryColor.withOpacity(0.9),
         onPressed: onPressed,
         child: CustomText(
           text: buttonText,

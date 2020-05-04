@@ -1,17 +1,17 @@
 import 'package:media_picker/utils/base_equatable.dart';
 
-class ImageHtmlState extends BaseEquatable {}
+class HtmlImageScreenState extends BaseEquatable {}
 
-class ImageHtmlInitialState extends ImageHtmlState {
+class ImageHtmlInitialState extends HtmlImageScreenState {
   @override
   String toString() {
     return "ImageHtmlInitialState";
   }
 }
 
-class ImageHtmlButtonPressedState extends ImageHtmlState {
-  String imgSrc;
-  ImageHtmlButtonPressedState(this.imgSrc);
+class HtmlImageButtonPressedState extends HtmlImageScreenState {
+  String imageSource;
+  HtmlImageButtonPressedState(this.imageSource);
   @override
   bool operator ==(Object other) => false;
   @override

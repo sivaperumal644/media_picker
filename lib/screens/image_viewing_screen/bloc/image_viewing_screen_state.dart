@@ -1,8 +1,8 @@
 import 'package:media_picker/utils/base_equatable.dart';
 
-class ImageViewState extends BaseEquatable {}
+class ImageViewingScreenState extends BaseEquatable {}
 
-class ImageViewInitialState extends ImageViewState {
+class ImageViewingScreenInitialState extends ImageViewingScreenState {
   @override
   String toString() {
     return "ImageViewInitialState";

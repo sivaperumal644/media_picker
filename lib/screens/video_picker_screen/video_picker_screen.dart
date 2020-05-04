@@ -3,13 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:media_picker/components/custom_alert_dialog.dart';
-import 'package:media_picker/components/custom_text.dart';
-import 'package:media_picker/screens/video_picker_screen/bloc/video_event.dart';
+import 'package:media_picker/screens/video_picker_screen/bloc/video_picker_screen_bloc.dart';
+import 'package:media_picker/screens/video_picker_screen/bloc/video_picker_screen_event.dart';
+import 'package:media_picker/screens/video_picker_screen/bloc/video_picker_screen_state.dart';
+import 'package:media_picker/utils/color_resource.dart';
 import 'package:media_picker/utils/image_resource.dart';
 import 'package:media_picker/utils/string_resource.dart';
-import 'bloc/video_bloc.dart';
-import 'bloc/video_state.dart';
+import 'package:media_picker/widget/common/custom_alert_dialog.dart';
+import 'package:media_picker/widget/common/custom_image.dart';
+import 'package:media_picker/widget/common/custom_scaffold.dart';
+import 'package:media_picker/widget/common/custom_text.dart';
 
 class VideoPickerScreen extends StatefulWidget {
   @override
@@ -17,37 +20,44 @@ class VideoPickerScreen extends StatefulWidget {
 }
 
 class _VideoPickerScreenState extends State<VideoPickerScreen> {
-  VideoBloc videoBloc;
+  VideoPickerScreenBloc videoBloc;
 
   @override
   void initState() {
     super.initState();
-    videoBloc = BlocProvider.of<VideoBloc>(context);
+    videoBloc = BlocProvider.of<VideoPickerScreenBloc>(context);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    videoBloc.chewieController.dispose();
+    videoBloc.videoPlayerController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
         title: CustomText(text: StringResource.videoPickerText),
-        backgroundColor: Colors.red.withOpacity(0.8),
+        backgroundColor: ColorResource.primaryColor.withOpacity(0.8),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: onFloatingActionButtonPressed,
-        backgroundColor: Colors.red.withOpacity(0.8),
+        backgroundColor: ColorResource.primaryColor.withOpacity(0.8),
         child: Icon(Icons.photo_camera),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: BlocListener(
         bloc: videoBloc,
         listener: (context, state) {
-          if (state is VideoAvailableState) {
+          if (state is VideoPickerScreenVideoAvailableState) {
             Navigator.pop(context);
           }
         },
-        child: BlocBuilder<VideoBloc, VideoState>(
+        child: BlocBuilder<VideoPickerScreenBloc, VideoPickerScreenState>(
           bloc: videoBloc,
-          builder: (BuildContext context, VideoState state) {
+          builder: (BuildContext context, VideoPickerScreenState state) {
             return Column(
               children: <Widget>[
                 SizedBox(height: 50),
@@ -68,8 +78,8 @@ class _VideoPickerScreenState extends State<VideoPickerScreen> {
                         ),
                       )
                     : Center(
-                        child: Image.asset(
-                          ImageResourse.placeHolder,
+                        child: CustomImage(
+                          image: ImageResourse.placeHolder,
                           width: 350,
                           height: 300,
                           fit: BoxFit.cover,
@@ -89,10 +99,10 @@ class _VideoPickerScreenState extends State<VideoPickerScreen> {
       builder: (_) => CustomAlertDialog(
         titleText: StringResource.pickAnVideoText,
         onCameraPressed: () {
-          videoBloc.add(VideoFromCameraButtonPressedEvent());
+          videoBloc.add(VideoPickerScreenCameraButtonPressedEvent());
         },
         onGalleryPressed: () {
-          videoBloc.add(VideoFromGalleryButtonPressedEvent());
+          videoBloc.add(VideoPickerScreenGalleryButtonPressedEvent());
         },
       ),
     );

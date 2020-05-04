@@ -2,23 +2,16 @@ import 'dart:io';
 
 import 'package:media_picker/utils/base_equatable.dart';
 
-class ImageState extends BaseEquatable {}
+class ImagePickerScreenState extends BaseEquatable {}
 
-class ImageInitialState extends ImageState {
+class ImagePickerScreenInitialState extends ImagePickerScreenState {
   @override
   String toString() {
     return "ImageInitialState";
   }
 }
 
-class ImageDialogState extends ImageState {
-  @override
-  String toString() {
-    return "ImageDialogState";
-  }
-}
-
-class ImageAvailableState extends ImageState {
+class ImagePickerScreenImageAvailableState extends ImagePickerScreenState {
   @override
   bool operator ==(Object other) => false;
 
@@ -28,9 +21,9 @@ class ImageAvailableState extends ImageState {
   }
 }
 
-class ImageViewNavigateState extends ImageState {
+class ImagePickerScreenNavigateState extends ImagePickerScreenState {
   File image;
-  ImageViewNavigateState(this.image);
+  ImagePickerScreenNavigateState(this.image);
   @override
   bool operator ==(Object other) => false;
   @override

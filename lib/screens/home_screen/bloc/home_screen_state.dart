@@ -1,15 +1,15 @@
 import 'package:media_picker/utils/base_equatable.dart';
 
-class HomeState extends BaseEquatable {}
+class HomeScreenState extends BaseEquatable {}
 
-class HomeInitialState extends HomeState{
+class HomeScreenInitialState extends HomeScreenState{
   @override
   String toString() {
     return "HomeInitialState";
   }
 }
 
-class HomeImageButtonPressedState extends HomeState {
+class HomeScreenImageButtonPressedState extends HomeScreenState {
   @override
   bool operator ==(Object other) => false;
   @override
@@ -18,7 +18,7 @@ class HomeImageButtonPressedState extends HomeState {
   }
 }
 
-class HomeVideoButtonPressedState extends HomeState {
+class HomeScreenVideoButtonPressedState extends HomeScreenState {
   @override
   bool operator ==(Object other) => false;
   @override
@@ -27,7 +27,7 @@ class HomeVideoButtonPressedState extends HomeState {
   }
 }
 
-class HomeHtmlImageButtonPressedState extends HomeState {
+class HomeScreenHtmlImageButtonPressedState extends HomeScreenState {
   @override
   bool operator ==(Object other) => false;
   @override

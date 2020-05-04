@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:media_picker/utils/color_resource.dart';
 import 'package:media_picker/utils/string_resource.dart';
 
 import 'custom_text.dart';
@@ -23,7 +24,7 @@ class CustomAlertDialog extends StatelessWidget {
         textAlign: TextAlign.center,
         style: GoogleFonts.aBeeZee(
           fontSize: 20,
-          color: Colors.red,
+          color: ColorResource.primaryColor,
           fontWeight: FontWeight.bold,
         ),
       ),
