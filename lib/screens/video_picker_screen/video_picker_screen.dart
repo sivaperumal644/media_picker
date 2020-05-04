@@ -69,7 +69,7 @@ class _VideoPickerScreenState extends State<VideoPickerScreen> {
                   ),
                 ),
                 SizedBox(height: 24),
-                (videoBloc.chewieController != null)
+                (videoBloc.videoFile != null)
                     ? Center(
                         child: Container(
                           height: 350,
